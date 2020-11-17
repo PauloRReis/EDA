@@ -14,6 +14,7 @@ void mostra_funcionario(Dados x);
 int maior_salario(Dados *x, int n);
 int menor_salario(Dados *x, int n);
 int media_salarios(Dados *x, int n);
+void remover_funcionario(Dados *x, int p, int n);
 
 int main(){
 
@@ -22,6 +23,7 @@ int main(){
     int regra = -1;
     int n = 0;
     int pos = 0;
+    int p = 0;
 
     do{
 
@@ -84,22 +86,29 @@ int main(){
 
             n++;
             x = realloc(x, sizeof(Dados) * n);
+
             le_funcionario(&x[n-1]);
 
         }
 
         if(regra == 8){
 
+            printf("\nPosicao do funcionario a ser removido: ");
+            scanf(" %d", &p);
+
+            remover_funcionario(x, p, n);
+
             n--;
+
             x = realloc(x, sizeof(Dados) * n);
             
-
         }
-
 
     }while(regra != 0);
 
+    free(x);
 
+    return 0;
 }
 
 void menu(){
@@ -193,5 +202,22 @@ int media_salarios(Dados *x, int n){
         soma += x[i].salario; 
     }
 
-    return (soma/6);
+    return (soma/n);
+}
+
+void remover_funcionario(Dados *x, int p, int n){
+
+    int i, j;
+    Dados auxiliar;
+
+    for(i = 0 ; i < n ; i++){
+        if(i == (p-1)){
+            for(j = i ; j < (n-1) ; j++){
+                auxiliar = x[j];
+                x[j] = x[j+1];
+                x[j+1] = auxiliar;
+            }
+        }
+    }
+
 }
