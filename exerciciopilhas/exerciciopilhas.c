@@ -114,7 +114,7 @@ int profundidade(NO * lista, int v){
 
     mov = lista;
 
-    while(mov->valor != v){
+    while(mov->valor != v || mov != NULL){
         cont++;
         mov = mov->prox;
     }
