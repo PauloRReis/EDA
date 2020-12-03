@@ -95,6 +95,10 @@ int conta_ced(NO * lista){
 
     mov = lista;
 
+    if(lista == NULL){
+        return 0;
+    }
+
     while(mov != NULL){
         cont++;
         mov = mov->prox;
@@ -124,7 +128,7 @@ void insere_valor(NO * lista, int elemento){
 
     m1 = (NO *)malloc(sizeof(NO));
     
-    m1->prox = lista;
+    m1->prox = &lista;
     m1->valor = elemento;
     lista = m1;
 
