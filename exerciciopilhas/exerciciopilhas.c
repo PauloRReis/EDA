@@ -8,9 +8,11 @@ struct reg{
 
 typedef struct reg NO;
 
+void menu();
 void imprime(NO * lista);
 int conta_ced(NO * lista);
 int profundidade(NO * lista, int v);
+void insere_valor(NO * lista, int elemento);
 
 int main(){
 
@@ -18,6 +20,7 @@ int main(){
     NO m2,m3;
     int regra = 0;
     int v = 0;
+    int elemento = 0;
 
     lista = (NO *)malloc(sizeof(NO));
     lista->valor = 5;
@@ -28,31 +31,48 @@ int main(){
     m3.valor = 7;
     m3.prox = NULL;
 
-    printf("| 1 - IMPRIMIR LISTA             |\n");
-    printf("| 2 - CONTAR TAMANHO LISTA       |\n");
-    printf("| 3 - PROFUNDIDADE DE TAL VALOR  |\n");
+    do{
+    
+        menu();
 
-    scanf(" %d", &regra);
+        scanf(" %d", &regra);
 
-    switch(regra){
+        switch(regra){
 
-        case 1:
-            imprime(lista);
-            break;
+            case 1:
+                imprime(lista);
+                break;
 
-        case 2:
-            printf("%d", conta_ced(lista));
-            break;
+            case 2:
+                printf("%d\n", conta_ced(lista));
+                break;
 
-        case 3:
-            printf("Digite o valor: ");
-            scanf("%d", &v);
-            printf("%d",profundidade(lista, v));
-            break;
+            case 3:
+                printf("Digite o valor: ");
+                scanf("%d", &v);
+                printf("%d\n",profundidade(lista, v));
+                break;
+
+            case 4:
+                printf("Digite o valor: ");
+                scanf("%d", &elemento);
+                insere_valor(lista, elemento);
+                break;
+
 
     }
 
+    }while(regra != 0);
+
     return 0;
+}
+
+void menu(){
+    printf("| 1 - IMPRIMIR LISTA             |\n");
+    printf("| 2 - CONTAR TAMANHO LISTA       |\n");
+    printf("| 3 - PROFUNDIDADE DE TAL VALOR  |\n");
+    printf("| 4 - INSERIR UM VALOR           |\n");
+    printf("| 0 - SAIR                       |\n");
 }
 
 void imprime(NO * lista){
@@ -96,4 +116,16 @@ int profundidade(NO * lista, int v){
     }
 
     return cont;
+}
+
+void insere_valor(NO * lista, int elemento){
+
+    NO * m1;
+
+    m1 = (NO *)malloc(sizeof(NO));
+    
+    m1->prox = lista;
+    m1->valor = elemento;
+    lista = m1;
+
 }
